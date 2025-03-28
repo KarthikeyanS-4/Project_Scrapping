@@ -27,7 +27,6 @@ URLS: List[str] = [
     "https://www.tcs.com",
     "https://www.ford.com",
     "https://www.siemens-energy.com",
-    "https://www.theheinekencompany.com",
     "https://www.americanexpress.com",
 ]
 
@@ -144,7 +143,7 @@ def main() -> None:
         time.sleep(5)  # Prevent API rate limiting
 
     df = pd.DataFrame(results)
-    df.to_csv("extracted_company_details.csv", index=False)
+    df.to_csv("extracted_company_details_1.csv", index=False)
     print("Data saved to extracted_company_details.csv")
 
 
