@@ -22,17 +22,18 @@ MODELS = [
 
 # List of URLs to scrape
 URLS: List[str] = [
-    "https://lenovo.com",
-    "https://www.gsk.com",
-    "https://www.tcs.com",
-    "https://www.ford.com",
-    "https://www.siemens-energy.com",
+    # "https://lenovo.com",
+    # "https://www.gsk.com",
+    # "https://www.tcs.com",
+    # "https://www.ford.com",
+    # "https://www.siemens-energy.com",
     "https://www.americanexpress.com",
 ]
 
 RELEVANT_LINKS: List[str] = [
     "home", "about", "contact", "services", "products", "Contact Us",
-    "About Lenovo", "Investors", "Vehicles",
+    "About Lenovo", "Investors", "Vehicles","governance-and-corporate-responsibility",
+    "who-we-are", "our-business"
 ]
 
 
@@ -103,20 +104,21 @@ def extract_details(text: str) -> str:
                     {text}
                     You are a technical content writer for a person who is in the field of Market Research meaning
                         he wants constantly wants data of many companies That is why he wants to know about the company
-                        -"What is the company's mission statement or core values?"
-                        -"What products or services does the company offer?"
-                        -"When was the company founded, and who were the founders?"
-                        -"Where is the company's headquarters located?"
-                        -"Who are the key executives or leadership team members?"
-                        -"Has the company received any notable awards or recognitions?"
+                        - "What is the company's mission statement or core values?"
+                        - "What products or services does the company offer?"
+                        - "When was the company founded, and who were the founders?"
+                        - "Where is the company's headquarters located?"
+                        - "Who are the key executives or leadership team members?"
+                        - "Has the company received any notable awards or recognitions?"
                         
                         
-                        Output format should follow only text in csv format without any markdown elements and the first row should contain the questions and quoted for each question and answer and only one "" so that it can be recognized as a cell in csv.
-                        Don't Quote the whole response, only the answers to the questions. And the questions which have comma in them should be quoted.
-                        Answer these questions from the given text content.
-                        No other text needs to be generated just the answers to these questions.
-                        If the answer is not present in the text, then say "Not Available".
-                        The answers should be human like and shouldn't explicitly say anything about the availability of information in the text.
+                        Format:
+                        - The first row should contain the quoted questions as CSV headers.
+                        - Subsequent rows should contain the corresponding answers from the input text.
+                        - The answers must not quote the response unnecessarily, except where commas are involved.
+                        - For missing information, use "Not Available".
+
+                        No extra text should be included, only the structured CSV output.
 
                 """
     try:
@@ -143,7 +145,7 @@ def main() -> None:
         time.sleep(5)  # Prevent API rate limiting
 
     df = pd.DataFrame(results)
-    df.to_csv("extracted_company_details_1.csv", index=False)
+    df.to_csv("extracted_company_details.csv", index=False)
     print("Data saved to extracted_company_details.csv")
 
 
